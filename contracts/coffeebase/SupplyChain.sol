@@ -182,40 +182,46 @@ contract SupplyChain {
   // Define a function 'processtItem' that allows a farmer to mark an item 'Processed'
   function processItem(uint _upc) public 
   // Call modifier to check if upc has passed previous supply chain stage
-
+  harvested(_upc)
   // Call modifier to verify caller of this function
-  
+  verifyCaller(items[_upc].ownerID)
   {
     // Update the appropriate fields
-    
+    items[_upc].itemState = State.Processed;
+
     // Emit the appropriate event
-    
+    Processed(_upc);
+
   }
 
   // Define a function 'packItem' that allows a farmer to mark an item 'Packed'
   function packItem(uint _upc) public 
   // Call modifier to check if upc has passed previous supply chain stage
-  
+  processed(_upc)
   // Call modifier to verify caller of this function
-  
+  verifyCaller(items[_upc].ownerID)
+
   {
     // Update the appropriate fields
-    
+    items[_upc].itemState = State.Packed;
+
     // Emit the appropriate event
-    
+    Packed(_upc);
   }
 
   // Define a function 'sellItem' that allows a farmer to mark an item 'ForSale'
   function sellItem(uint _upc, uint _price) public 
   // Call modifier to check if upc has passed previous supply chain stage
-  
+  packed(_upc)
   // Call modifier to verify caller of this function
-  
+  verifyCaller(items[_upc].ownerID)
+
   {
     // Update the appropriate fields
-    
+    items[_upc].itemState = State.ForSale;
+
     // Emit the appropriate event
-    
+    ForSale(_upc);
   }
 
   // Define a function 'buyItem' that allows the disributor to mark an item 'Sold'
@@ -223,15 +229,15 @@ contract SupplyChain {
   // and any excess ether sent is refunded back to the buyer
   function buyItem(uint _upc) public payable 
     // Call modifier to check if upc has passed previous supply chain stage
-    
+
     // Call modifer to check if buyer has paid enough
-    
+
     // Call modifer to send any excess ether back to buyer
-    
+
     {
     
     // Update the appropriate fields - ownerID, distributorID, itemState
-    
+
     // Transfer money to farmer
     
     // emit the appropriate event
