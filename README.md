@@ -21,11 +21,11 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-Please make sure you've already installed ganache-cli, Truffle and enabled MetaMask extension in your browser.
+Please make sure you've already installed ganache-cli, Truffle version 4 and enabled MetaMask extension in your browser.
 
 ```
 ganache-cli https://www.truffleframework.com/docs/ganache/quickstart
-Truffle https://www.truffleframework.com/docs/truffle/getting-started/installation
+Truffle version 4 https://www.truffleframework.com/docs/truffle/getting-started/installation
 MetaMask https://metamask.io/
 ```
 
