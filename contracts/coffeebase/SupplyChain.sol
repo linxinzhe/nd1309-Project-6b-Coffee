@@ -288,7 +288,7 @@ contract SupplyChain {
     // Update the appropriate fields - ownerID, consumerID, itemState
       items[_upc].ownerID = msg.sender;
       items[_upc].consumerID = msg.sender;
-      items[_upc].itemState = State.Received;
+      items[_upc].itemState = State.Purchased;
 
     // Emit the appropriate event
       emit Purchased(_upc);
