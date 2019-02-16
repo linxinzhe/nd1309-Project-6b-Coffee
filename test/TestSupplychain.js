@@ -140,6 +140,7 @@ contract('SupplyChain', function(accounts) {
         const resultBufferTwo = await supplyChain.fetchItemBufferTwo.call(upc);
 
         // Verify the result set
+        assert.equal(resultBufferTwo[4], productPrice, 'Error: Wrong productPrice');
         assert.equal(resultBufferTwo[5], 3, 'Error: Invalid item State');
     });
 
@@ -206,19 +207,21 @@ contract('SupplyChain', function(accounts) {
         });
 
         // Mark an item as Received by calling function receiveItem()
-
+        await supplyChain.receiveItem(upc);
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
         const resultBufferOne = await supplyChain.fetchItemBufferOne.call(upc);
         const resultBufferTwo = await supplyChain.fetchItemBufferTwo.call(upc);
 
         // Verify the result set
-
+        assert.equal(resultBufferOne[2], retailerID, 'Error: Wrong ownerID');
+        assert.equal(resultBufferTwo[7], retailerID, 'Error: Wrong retailerID');
+        assert.equal(resultBufferTwo[5], 6, 'Error: Invalid item State');
     });
 
     // 8th Test
     it("Testing smart contract function purchaseItem() that allows a consumer to purchase coffee", async () => {
-        const supplyChain = await SupplyChain.deployed()
+        const supplyChain = await SupplyChain.deployed();
 
         // Declare and Initialize a variable for event
         var eventEmitted = false;
@@ -230,14 +233,16 @@ contract('SupplyChain', function(accounts) {
         });
 
         // Mark an item as Sold by calling function purchaseItem()
-
+        await supplyChain.purchaseItem(upc);
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
         const resultBufferOne = await supplyChain.fetchItemBufferOne.call(upc);
         const resultBufferTwo = await supplyChain.fetchItemBufferTwo.call(upc);
 
         // Verify the result set
-
+        assert.equal(resultBufferOne[2], consumerID, 'Error: Wrong ownerID');
+        assert.equal(resultBufferTwo[8], consumerID, 'Error: Wrong consumerID');
+        assert.equal(resultBufferTwo[5], 7, 'Error: Invalid item State');
     });
 
     // 9th Test

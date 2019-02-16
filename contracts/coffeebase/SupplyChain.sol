@@ -217,6 +217,7 @@ contract SupplyChain {
 
   {
     // Update the appropriate fields
+    items[_upc].productPrice = _price;
     items[_upc].itemState = State.ForSale;
 
     // Emit the appropriate event
@@ -319,14 +320,14 @@ contract SupplyChain {
     
   return 
   (
-  itemSKU,
-  itemUPC,
-  ownerID,
-  originFarmerID,
-  originFarmName,
-  originFarmInformation,
-  originFarmLatitude,
-  originFarmLongitude
+  itemSKU,//0
+  itemUPC,//1
+  ownerID,//2
+  originFarmerID,//3
+  originFarmName,//4
+  originFarmInformation,//5
+  originFarmLatitude,//6
+  originFarmLongitude//7
   );
   }
 
@@ -357,15 +358,15 @@ contract SupplyChain {
     
   return 
   (
-  itemSKU,
-  itemUPC,
-  productID,
-  productNotes,
-  productPrice,
-  itemState,
-  distributorID,
-  retailerID,
-  consumerID
+  itemSKU,//0
+  itemUPC,//1
+  productID,//2
+  productNotes,//3
+  productPrice,//4
+  itemState,//5
+  distributorID,//6
+  retailerID,//7
+  consumerID//8
   );
   }
 }
