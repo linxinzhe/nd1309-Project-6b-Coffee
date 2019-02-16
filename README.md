@@ -6,14 +6,13 @@ The user story is similar to any commonly used supply chain process. A Seller ca
 
 ## The DApp UML: 
 
-![FTC_Activity_Diagram.png](uml/FTC_Activity_Diagram.png)
+![Coffee-Activity-Diagram](uml/Coffee-Activity-Diagram.png)
 
-![FTC_Class_Diagram.png](uml/FTC_Class_Diagram.png)
+![Coffee-Sequence-Diagram](uml/Coffee-Sequence-Diagram.png)
 
-![FTC_Sequence_Diagram.png](uml/FTC_Sequence_Diagram.png)
+![Coffee-State-Diagram](uml/Coffee-State-Diagram.png)
 
-![FTC_State_Diagram.png](uml/FTC_State_Diagram.png)
-
+![Coffee-Class-Diagram](uml/Coffee-Class-Diagram.png)
 
 ## Getting Started
 
