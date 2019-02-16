@@ -164,8 +164,9 @@ contract('SupplyChain', function(accounts) {
         const resultBufferTwo = await supplyChain.fetchItemBufferTwo.call(upc);
 
         // Verify the result set
+        assert.equal(resultBufferOne[2], distributorID, 'Error: Wrong ownerID');
+        assert.equal(resultBufferTwo[6], distributorID, 'Error: Wrong distributorID');
         assert.equal(resultBufferTwo[5], 4, 'Error: Invalid item State');
-
     });
 
     // 6th Test
@@ -193,7 +194,7 @@ contract('SupplyChain', function(accounts) {
 
     // 7th Test
     it("Testing smart contract function receiveItem() that allows a retailer to mark coffee received", async () => {
-        const supplyChain = await SupplyChain.deployed()
+        const supplyChain = await SupplyChain.deployed();
 
         // Declare and Initialize a variable for event
         var eventEmitted = false;
