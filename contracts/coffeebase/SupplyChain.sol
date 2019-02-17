@@ -1,7 +1,12 @@
 pragma solidity ^0.4.24;
 
+import "../coffeeaccesscontrol/FarmerRole.sol";
+import "../coffeeaccesscontrol/ConsumerRole.sol";
+import "../coffeeaccesscontrol/RetailerRole.sol";
+import "../coffeeaccesscontrol/DistributorRole.sol";
+
 // Define a contract 'Supplychain'
-contract SupplyChain {
+contract SupplyChain is ConsumerRole, RetailerRole, DistributorRole{
 
     // Define 'owner'
     address owner;
@@ -231,7 +236,7 @@ contract SupplyChain {
     // Define a function 'buyItem' that allows the disributor to mark an item 'Sold'
     // Use the above defined modifiers to check if the item is available for sale, if the buyer has paid enough,
     // and any excess ether sent is refunded back to the buyer
-    function buyItem(uint _upc) public payable
+    function buyItem(uint _upc) public payable onlyDistributor
         // Call modifier to check if upc has passed previous supply chain stage
     forSale(_upc)
         // Call modifer to check if buyer has paid enough
@@ -258,7 +263,7 @@ contract SupplyChain {
         // Call modifier to check if upc has passed previous supply chain stage
     sold(_upc)
         // Call modifier to verify caller of this function
-    verifyCaller(items[_upc].ownerID)
+    verifyCaller(items[_upc].distributorID)
     {
         // Update the appropriate fields
         items[_upc].itemState = State.Shipped;
@@ -269,7 +274,7 @@ contract SupplyChain {
 
     // Define a function 'receiveItem' that allows the retailer to mark an item 'Received'
     // Use the above modifiers to check if the item is shipped
-    function receiveItem(uint _upc) public
+    function receiveItem(uint _upc) public onlyRetailer
         // Call modifier to check if upc has passed previous supply chain stage
     shipped(_upc)
         // Access Control List enforced by calling Smart Contract / DApp
@@ -285,7 +290,7 @@ contract SupplyChain {
 
     // Define a function 'purchaseItem' that allows the consumer to mark an item 'Purchased'
     // Use the above modifiers to check if the item is received
-    function purchaseItem(uint _upc) public
+    function purchaseItem(uint _upc) public onlyConsumer
         // Call modifier to check if upc has passed previous supply chain stage
     received(_upc)
         // Access Control List enforced by calling Smart Contract / DApp
