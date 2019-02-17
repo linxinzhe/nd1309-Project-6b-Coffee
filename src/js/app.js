@@ -5,17 +5,17 @@ App = {
     sku: 0,
     upc: 0,
     metamaskAccountID: "0x0000000000000000000000000000000000000000",
-    ownerID: "0x0000000000000000000000000000000000000000",
-    originFarmerID: "0x0000000000000000000000000000000000000000",
+    ownerID: "0x0c7379b91278e325a1e06c8f81e25207d9f6cd86",
+    originFarmerID: "0xca67231ebd20b5818bc0ca90aee4c7c855613332",
     originFarmName: null,
     originFarmInformation: null,
     originFarmLatitude: null,
     originFarmLongitude: null,
     productNotes: null,
     productPrice: 0,
-    distributorID: "0x0000000000000000000000000000000000000000",
-    retailerID: "0x0000000000000000000000000000000000000000",
-    consumerID: "0x0000000000000000000000000000000000000000",
+    distributorID: "0x9910afb70be9f2721ed3cebed9b44ad54065bbb1",
+    retailerID: "0x8e174c2068fc7b23de52e9ab134ed3d3af7c5762",
+    consumerID: "0x8d8dfb81981cd5316521e8db09f3f88328137daf",
 
     init: async function () {
         App.readForm();
@@ -74,7 +74,7 @@ App = {
         }
         // If no injected web3 instance is detected, fall back to Ganache
         else {
-            App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
+            App.web3Provider = new Web3.providers.HttpProvider('http://localhost:8545');
         }
 
         App.getMetaskAccountID();
