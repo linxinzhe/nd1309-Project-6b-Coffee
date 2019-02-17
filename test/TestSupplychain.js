@@ -64,7 +64,7 @@ contract('SupplyChain', function (accounts) {
         // Verify the result set
         assert.equal(resultBufferOne[0], sku, 'Error: Invalid item SKU');
         assert.equal(resultBufferOne[1], upc, 'Error: Invalid item UPC');
-        assert.equal(resultBufferOne[2], ownerID, 'Error: Missing or Invalid ownerID');
+        assert.equal(resultBufferOne[2], originFarmerID, 'Error: Missing or Invalid ownerID');
         assert.equal(resultBufferOne[3], originFarmerID, 'Error: Missing or Invalid originFarmerID');
         assert.equal(resultBufferOne[4], originFarmName, 'Error: Missing or Invalid originFarmName');
         assert.equal(resultBufferOne[5], originFarmInformation, 'Error: Missing or Invalid originFarmInformation');
@@ -88,7 +88,7 @@ contract('SupplyChain', function (accounts) {
         });
 
         // Mark an item as Processed by calling function processItem()
-        await supplyChain.processItem(upc);
+        await supplyChain.processItem(upc, {from: originFarmerID});
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
         const resultBufferTwo = await supplyChain.fetchItemBufferTwo.call(upc);
@@ -112,7 +112,7 @@ contract('SupplyChain', function (accounts) {
         });
 
         // Mark an item as Packed by calling function packItem()
-        await supplyChain.packItem(upc);
+        await supplyChain.packItem(upc,{from: originFarmerID});
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
         const resultBufferTwo = await supplyChain.fetchItemBufferTwo.call(upc);
@@ -124,7 +124,7 @@ contract('SupplyChain', function (accounts) {
 
     // 4th Test
     it("Testing smart contract function sellItem() that allows a farmer to sell coffee", async () => {
-        const supplyChain = await SupplyChain.deployed()
+        const supplyChain = await SupplyChain.deployed();
 
         // Declare and Initialize a variable for event
         var eventEmitted = false;
@@ -136,7 +136,7 @@ contract('SupplyChain', function (accounts) {
         });
 
         // Mark an item as ForSale by calling function sellItem()
-        await supplyChain.sellItem(upc);
+        await supplyChain.sellItem(upc, productPrice,{from: originFarmerID});
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
         const resultBufferTwo = await supplyChain.fetchItemBufferTwo.call(upc);
@@ -161,7 +161,7 @@ contract('SupplyChain', function (accounts) {
         });
 
         // Mark an item as Sold by calling function buyItem()
-        await supplyChain.buyItem(upc);
+        await supplyChain.buyItem(upc,{from: distributorID, value: productPrice});
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
         const resultBufferOne = await supplyChain.fetchItemBufferOne.call(upc);
@@ -188,7 +188,7 @@ contract('SupplyChain', function (accounts) {
         });
 
         // Mark an item as Shipped by calling function shipItem()
-        await supplyChain.shipItem(upc);
+        await supplyChain.shipItem(upc,{from: distributorID});
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
         const resultBufferTwo = await supplyChain.fetchItemBufferTwo.call(upc);
@@ -212,7 +212,7 @@ contract('SupplyChain', function (accounts) {
         });
 
         // Mark an item as Received by calling function receiveItem()
-        await supplyChain.receiveItem(upc);
+        await supplyChain.receiveItem(upc,{from: retailerID});
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
         const resultBufferOne = await supplyChain.fetchItemBufferOne.call(upc);
@@ -239,7 +239,7 @@ contract('SupplyChain', function (accounts) {
         });
 
         // Mark an item as Sold by calling function purchaseItem()
-        await supplyChain.purchaseItem(upc);
+        await supplyChain.purchaseItem(upc,{from: consumerID});
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
         const resultBufferOne = await supplyChain.fetchItemBufferOne.call(upc);
@@ -261,7 +261,7 @@ contract('SupplyChain', function (accounts) {
         // Verify the result set:
         assert.equal(resultBufferOne[0], sku, 'Error: Wrong sku');
         assert.equal(resultBufferOne[1], upc, 'Error: Wrong upc');
-        assert.equal(resultBufferOne[2], ownerID, 'Error: Wrong ownerID');
+        assert.equal(resultBufferOne[2], consumerID, 'Error: Wrong ownerID');
         assert.equal(resultBufferOne[3], originFarmerID, 'Error: Wrong originFarmerID');
         assert.equal(resultBufferOne[4], originFarmName, 'Error: Wrong originFarmName');
         assert.equal(resultBufferOne[5], originFarmInformation, 'Error: Wrong originFarmInformation');
@@ -277,14 +277,14 @@ contract('SupplyChain', function (accounts) {
         const resultBufferTwo = await supplyChain.fetchItemBufferTwo.call(upc);
         // Verify the result set:
         assert.equal(resultBufferTwo[0], sku, 'Error: Wrong sku');
-        assert.equal(resultBufferOne[1], upc, 'Error: Wrong upc');
-        assert.equal(resultBufferOne[2], productID, 'Error: Wrong productID');
-        assert.equal(resultBufferOne[3], productNotes, 'Error: Wrong productNotes');
-        assert.equal(resultBufferOne[4], productPrice, 'Error: Wrong productPrice');
-        assert.equal(resultBufferOne[5], itemState, 'Error: Wrong itemState');
-        assert.equal(resultBufferOne[6], distributorID, 'Error: Wrong distributorID');
-        assert.equal(resultBufferOne[7], retailerID, 'Error: Wrong retailerID');
-        assert.equal(resultBufferOne[8], consumerID, 'Error: Wrong consumerID');
+        assert.equal(resultBufferTwo[1], upc, 'Error: Wrong upc');
+        assert.equal(resultBufferTwo[2], productID, 'Error: Wrong productID');
+        assert.equal(resultBufferTwo[3], productNotes, 'Error: Wrong productNotes');
+        assert.equal(resultBufferTwo[4], productPrice, 'Error: Wrong productPrice');
+        assert.equal(resultBufferTwo[5], 7, 'Error: Wrong itemState');
+        assert.equal(resultBufferTwo[6], distributorID, 'Error: Wrong distributorID');
+        assert.equal(resultBufferTwo[7], retailerID, 'Error: Wrong retailerID');
+        assert.equal(resultBufferTwo[8], consumerID, 'Error: Wrong consumerID');
     });
 
 });
