@@ -89,3 +89,41 @@ HD Wallet-enabled Web3 provider. Use it to sign transactions for addresses deriv
 * Ganache-cli
 * Truffle
 * lite-server
+* infura
+
+## Deployment(Rinkeby)
+```
+Using network 'rinkeby'.
+
+Running migration: 1_initial_migration.js
+  Deploying Migrations...
+  ... 0x192ce8e021ed4941239f86a037f3515f1335e7d4235d23208283cb5296a04a83
+  Migrations: 0x13c3470acb122be6feefe7b6c8d6afa4e5eb6a2f
+Saving successful migration to network...
+  ... 0xbad962c3bcbc42c2e0ef3c6ac191827f5484b4ec6ea08666dbdbb7424b41db9a
+Saving artifacts...
+Running migration: 2_deploy_contracts.js
+  Deploying FarmerRole...
+  ... 0x1c3a4f6609d6e648be50e721da2253aa98eb76e628346b30e90b9588ebb1cdfe
+  FarmerRole: 0xfd55d738355c33596138f42d67c3f3d6197d764c
+  
+  Deploying DistributorRole...
+  ... 0xbe9f5e814f6e2133d9c2274b320148ca61c433c8c23f75da32ee9f0987bf24be
+  DistributorRole: 0xc1810f9ed814b9007100aad95480cc6903c86c0f
+  
+  Deploying RetailerRole...
+  ... 0x16799066a565bfbb1fc09e49e3efc6334632136db47d1dd87e1382f6e9e36a10
+  RetailerRole: 0x5e8c369d33f02368abf89143bbbcf7bcea6942af
+  
+  Deploying ConsumerRole...
+  ... 0x16d648dc3f0e5fca2bbeab44514ba1d790e67c482fd80268aa98ed748c7fbe62
+  ConsumerRole: 0xede8e9b60d1fd33b286ba6a1777d9f2a0842e643
+  
+  Deploying SupplyChain...
+  ... 0xa5ea8371ec0854b9103fab4ba78517ae603405e7f65685d41018eff2cb13c91c
+  SupplyChain: 0xe26b0f8aafa48fba663de879ddc381a1705e3a38
+  
+Saving successful migration to network...
+  ... 0x59f79790116faee9af32d51262b8668029e982dec052d6f99193e1300d5dfbc5
+Saving artifacts...
+```
